@@ -2,13 +2,20 @@ import streamlit as st
 import pickle
 import pandas as pd
 
-books_dict = pickle.load(open('bookspkl.pkl','rb'))
-books = pd.DataFrame(books_dict)
+def book_func(): 
+    books_dict = pickle.load(open('bookspkl.pkl','rb'))
+    books = pd.DataFrame(books_dict)
+    return books
+
+def similarity_func(): 
+    similarity = pickle.load(open('similaritypkl.pkl','rb'))
+    return similarity
+
+books = book_func()
+similarity = similarity_func()
 
 st.title('Books Recommender System')
 
-
-similarity = pickle.load(open('similaritypkl.pkl','rb'))
 def recommend(book):
     book_index = books[books['title'] == book].index[0]
     distances = similarity[book_index]
@@ -27,11 +34,6 @@ def recommend(book):
              recommended_book_author.append(books.iloc[i[0]].authors)
              recommended_book_rating.append(books.iloc[i[0]].average_rating)
     return recommended_books, recommended_book_posters, recommended_book_author, recommended_book_rating
-
-
-book_dict = pickle.load(open('books.pkl','rb'))
-books = pd.DataFrame(book_dict)
-similarity = pickle.load(open('similarity.pkl','rb'))
 
 
 selected_book_name = st.selectbox(

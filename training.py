@@ -65,7 +65,7 @@ new_books['identify'] = new_books['identify'].apply(rem_comm)
 # print(new_books['identify'])
 
 
-# pickle.dump(new_books.to_dict(),open('bookspkl.pkl','wb'))
+pickle.dump(new_books.to_dict(),open('books.pkl','wb'))
 
 #calculate distance between each movie to identify the level of similarity
 from sklearn.metrics.pairwise import cosine_similarity
@@ -74,7 +74,7 @@ cosine_similarity(vectors)
 
 similarity = cosine_similarity(vectors)
 
-# pickle.dump(similarity,open('similaritypkl.pkl','wb'))
+pickle.dump(similarity,open('similarity.pkl','wb'))
 
 # print(len(similarity))
 
